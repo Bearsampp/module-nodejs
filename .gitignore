@@ -1,14 +1,18 @@
 # Jetbrains
 /*.iml
-
-# Bearsampp
-/.dev
+/.idea
 /.idea/.gitignore
 /.idea/deployment.xml
 /.idea/discord.xml
-/.idea/module-nodejs.iml
+/.idea/module-perl.iml
 /.idea/modules.xml
-/bin/nodejs18.4/node_modules/npm/npmrc
-/bin/nodejs18.4/node_modules/npm/npmrc.ber
 /.idea/php.xml
 /.idea/vcs.xml
+
+# Neard
+/.dev
+
+# Visual Studio
+.vscode/
+.vs/
+.vsc/
