@@ -1,3 +1,5 @@
+<p align="center"><a href="https://bearsampp.com/contribute" target="_blank"><img width="250" src="img/Bearsampp-logo.svg"></a></p>
+
 [![GitHub release](https://img.shields.io/github/release/bearsampp/module-nodejs.svg?style=flat-square)](https://github.com/bearsampp/module-nodejs/releases/latest)
 ![Total downloads](https://img.shields.io/github/downloads/bearsampp/module-nodejs/total.svg?style=flat-square)
 
