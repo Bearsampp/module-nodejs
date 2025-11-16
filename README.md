@@ -21,6 +21,16 @@ Quick commands:
 - Build all local versions (prep/copy flow): `gradle releaseAll`
 - Clean: `gradle clean`
 
+Archive layout assurance:
+
+- The packaged archive includes the top-level version folder (e.g., `nodejs24.6.0/`).
+- Example: `bearsampp-nodejs-24.6.0-2025.8.21.7z` contains `nodejs24.6.0/` as the root, with files inside it.
+
+Verify quickly after a build:
+
+- 7z: `7z l bearsampp-nodejs-<ver>-<release>.7z | findstr nodejs<ver>` should list the folder.
+- Zip: Inspect contents; the first entry should be `nodejs<ver>/`.
+
 Version resolution strategy:
 
 1. Remote `modules-untouched` `nodejs.properties`

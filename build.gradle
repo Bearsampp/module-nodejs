@@ -529,15 +529,18 @@ tasks.register('release') {
             def archiveFile = file("${destFile}.7z")
             if (archiveFile.exists()) { delete archiveFile }
 
-            println "Compressing ${bundleName}${bundleVersion} to ${archiveFile.name}..."
+            println "Compressing (including top-level folder) ${bundleName}${bundleVersion} to ${archiveFile.name}..."
 
             def sevenZipExe = find7ZipExecutable()
             if (!sevenZipExe) { throw new GradleException("7-Zip not found. Please install 7-Zip or set 7Z_HOME environment variable.") }
             println "Using 7-Zip: ${sevenZipExe}"
 
-            def command = [ sevenZipExe, 'a', '-t7z', archiveFile.absolutePath.toString(), '.' ]
+            // IMPORTANT: run from the parent directory and add the folder name explicitly
+            def parentDir = prepPath.parentFile
+            def folderName = prepPath.name
+            def command = [ sevenZipExe, 'a', '-t7z', archiveFile.absolutePath.toString(), folderName ]
             def process = new ProcessBuilder(command as String[])
-                .directory(prepPath)
+                .directory(parentDir)
                 .redirectErrorStream(true)
                 .start()
             process.inputStream.eachLine { line -> if (line.trim()) println "  ${line}" }
@@ -551,9 +554,12 @@ tasks.register('release') {
             def archiveFile = file("${destFile}.zip")
             if (archiveFile.exists()) { delete archiveFile }
 
-            println "Compressing ${bundleName}${bundleVersion} to ${archiveFile.name}..."
+            println "Compressing (including top-level folder) ${bundleName}${bundleVersion} to ${archiveFile.name}..."
+            // Use Zip task but include the folder itself so the archive contains nodejs{version}/...
             task("zipArchive_${bundleVersion}", type: Zip) {
-                from prepPath
+                from(prepPath.parentFile) {
+                    include "${prepPath.name}/**"
+                }
                 destinationDirectory = archiveFile.parentFile
                 archiveFileName = archiveFile.name
             }.execute()
