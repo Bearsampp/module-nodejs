@@ -5,63 +5,65 @@
 
 This is a module of [Bearsampp project](https://github.com/bearsampp/bearsampp) involving Node.js.
 
-## Build (Gradle)
+## Build System
 
-This module now uses a pure Gradle build similar to the Bruno module.
+This project uses **Gradle** as its build system. The legacy Ant build has been fully replaced with a modern, pure Gradle implementation.
 
-Quick commands:
+### Quick Start
 
-- List tasks: `gradle tasks`
-- Show build info: `gradle info`
-- Verify environment: `gradle verify`
-- List local versions (bin and bin/archived): `gradle listVersions`
-- List releases from modules-untouched: `gradle listReleases`
-- Build a specific version: `gradle release -PbundleVersion=24.6.0`
-- Build interactively (choose from local versions): `gradle release`
-- Build all local versions (prep/copy flow): `gradle releaseAll`
-- Clean: `gradle clean`
+```bash
+# Display build information
+gradle info
 
-Archive layout assurance:
+# List all available tasks
+gradle tasks
 
-- The packaged archive includes the top-level version folder (e.g., `nodejs24.6.0/`).
-- Example: `bearsampp-nodejs-24.6.0-2025.8.21.7z` contains `nodejs24.6.0/` as the root, with files inside it.
+# Verify build environment
+gradle verify
 
-Verify quickly after a build:
+# Build a release (interactive)
+gradle release
 
-- 7z: `7z l bearsampp-nodejs-<ver>-<release>.7z | findstr nodejs<ver>` should list the folder.
-- Zip: Inspect contents; the first entry should be `nodejs<ver>/`.
+# Build a specific version (non-interactive)
+gradle release -PbundleVersion=24.6.0
 
-Version resolution strategy:
+# Clean build artifacts
+gradle clean
+```
 
-1. Remote `modules-untouched` `nodejs.properties`
-   - URL: `https://github.com/Bearsampp/modules-untouched/blob/main/modules/nodejs.properties`
-2. Fallback constructed URL: `.../releases/download/nodejs-{version}/nodejs-{version}-win-x64.7z`
+### Prerequisites
 
-Output locations and overrides:
+| Requirement       | Version       | Purpose                                  |
+|-------------------|---------------|------------------------------------------|
+| **Java**          | 8+            | Required for Gradle execution            |
+| **Gradle**        | 8.0+          | Build automation tool                    |
+| **7-Zip**         | Latest        | Archive creation (optional for zip)      |
 
-- Default base output: `<repo-root>/../bearsampp-build`
-- Override base output via either:
-  - `build.properties` property `build.path`
-  - Environment variable `BEARSAMPP_BUILD_PATH`
+### Available Tasks
 
-Packaging settings come from `build.properties`:
+| Task                  | Description                                      |
+|-----------------------|--------------------------------------------------|
+| `release`             | Build release package (interactive/non-interactive) |
+| `releaseAll`          | Build all versions in bin/ directory             |
+| `clean`               | Clean build artifacts and temporary files        |
+| `verify`              | Verify build environment and dependencies        |
+| `info`                | Display build configuration information          |
+| `listVersions`        | List available bundle versions in bin/           |
+| `listReleases`        | List releases from modules-untouched             |
+| `validateProperties`  | Validate build.properties configuration          |
+| `checkModulesUntouched` | Check modules-untouched integration            |
 
-- `bundle.name = nodejs`
-- `bundle.type = bins`
-- `bundle.format = 7z` (requires 7‑Zip)
+For complete documentation, see [.gradle-docs/README.md](.gradle-docs/README.md)
 
-7‑Zip detection (Windows):
+## Documentation
 
-- Auto-detects from `7Z_HOME` or common install paths, falls back to `where 7z.exe`.
-
-Documentation index: see `/.gradle-docs/README.md`.
-
-## Documentation and downloads
-
-https://bearsampp.com/module/nodejs
-
-Additional Gradle build docs for this module live in `/.gradle-docs/` of this repository.
+- **Build Documentation**: [.gradle-docs/README.md](.gradle-docs/README.md)
+- **Module Downloads**: https://bearsampp.com/module/nodejs
 
 ## Issues
 
 Issues must be reported on [Bearsampp repository](https://github.com/bearsampp/bearsampp/issues).
+
+## Statistics
+
+![Alt](https://repobeats.axiom.co/api/embed/YOUR_EMBED_ID_HERE.svg "Repobeats analytics image")
