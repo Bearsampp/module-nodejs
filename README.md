@@ -5,10 +5,65 @@
 
 This is a module of [Bearsampp project](https://github.com/bearsampp/bearsampp) involving Node.js.
 
-## Documentation and downloads
+## Build System
 
-https://bearsampp.com/module/nodejs
+This project uses **Gradle** as its build system. The legacy Ant build has been fully replaced with a modern, pure Gradle implementation.
+
+### Quick Start
+
+```bash
+# Display build information
+gradle info
+
+# List all available tasks
+gradle tasks
+
+# Verify build environment
+gradle verify
+
+# Build a release (interactive)
+gradle release
+
+# Build a specific version (non-interactive)
+gradle release -PbundleVersion=24.6.0
+
+# Clean build artifacts
+gradle clean
+```
+
+### Prerequisites
+
+| Requirement       | Version       | Purpose                                  |
+|-------------------|---------------|------------------------------------------|
+| **Java**          | 8+            | Required for Gradle execution            |
+| **Gradle**        | 8.0+          | Build automation tool                    |
+| **7-Zip**         | Latest        | Archive creation (optional for zip)      |
+
+### Available Tasks
+
+| Task                  | Description                                      |
+|-----------------------|--------------------------------------------------|
+| `release`             | Build release package (interactive/non-interactive) |
+| `releaseAll`          | Build all versions in bin/ directory             |
+| `clean`               | Clean build artifacts and temporary files        |
+| `verify`              | Verify build environment and dependencies        |
+| `info`                | Display build configuration information          |
+| `listVersions`        | List available bundle versions in bin/           |
+| `listReleases`        | List releases from modules-untouched             |
+| `validateProperties`  | Validate build.properties configuration          |
+| `checkModulesUntouched` | Check modules-untouched integration            |
+
+For complete documentation, see [.gradle-docs/README.md](.gradle-docs/README.md)
+
+## Documentation
+
+- **Build Documentation**: [.gradle-docs/README.md](.gradle-docs/README.md)
+- **Module Downloads**: https://bearsampp.com/module/nodejs
 
 ## Issues
 
 Issues must be reported on [Bearsampp repository](https://github.com/bearsampp/bearsampp/issues).
+
+## Statistics
+
+![Alt](https://repobeats.axiom.co/api/embed/YOUR_EMBED_ID_HERE.svg "Repobeats analytics image")
